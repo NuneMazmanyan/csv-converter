@@ -99,9 +99,11 @@ const server = http.createServer((request, response) => {
     if (method === 'POST' && url === '/exports') {
         let path = '';
 
-        request.on('data', async (chunk) => {
+        request.on('data', (chunk) => {
             path = (JSON.parse(chunk).path.replaceAll('//', '/'));
+        });
 
+        request.on('end', async()=>{
             try {
                 await convertCsvDirFilesToJSONDirFiles(path)
                 response.statusCode = 200;
@@ -111,7 +113,7 @@ const server = http.createServer((request, response) => {
                 response.statusCode = 500;
                 response.end('An error occurred during file conversion.');
             }
-        });
+        })
     }
 
     if (method === 'GET') {
