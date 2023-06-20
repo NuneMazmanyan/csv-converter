@@ -104,7 +104,6 @@ const server = http.createServer((request, response) => {
         });
 
         request.on('end', async()=>{
-            console.log('ads')
             try {
                 await convertCsvDirFilesToJSONDirFiles(path)
                 response.statusCode = 200;
