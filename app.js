@@ -104,6 +104,7 @@ const server = http.createServer((request, response) => {
         });
 
         request.on('end', async()=>{
+            console.log('ads')
             try {
                 await convertCsvDirFilesToJSONDirFiles(path)
                 response.statusCode = 200;
@@ -155,7 +156,7 @@ const server = http.createServer((request, response) => {
     }
 })
 
-server.listen(3000, () => {
+server.listen(3000, '192.168.5.59', () => {
 })
 console.log('server is up and running')
 
